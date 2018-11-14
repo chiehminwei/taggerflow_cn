@@ -25,7 +25,7 @@ class SupertagReader(object):
         return self.get_sentences(split_name, is_tritrain)
 
     def get_splits(self, read_tritrain=False):
-        train = self.get_split("/data/train.txt", is_tritrain=False)
-        tritrain = self.get_split("/data/tritrain.txt", is_tritrain=True) if read_tritrain else []
-        dev = self.get_split("/data/dev.txt", is_tritrain=False)
+        train = self.get_split("gdrive/'My Drive'/taggerflow_cn/data/train.txt", is_tritrain=False)
+        tritrain = self.get_split("gdrive/'My Drive'/taggerflow_cn/data/tritrain.txt", is_tritrain=True) if read_tritrain else []
+        dev = self.get_split("gdrive/'My Drive'/taggerflow_cn/data/dev.txt", is_tritrain=False)
         return train, tritrain, dev
