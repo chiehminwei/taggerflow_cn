@@ -52,10 +52,10 @@ class SupertaggerModel(object):
             # lstm = tf.contrib.cudnn_rnn.CudnnLSTM(self.num_layers, self.lstm_hidden_size, direction='bidirectional', dtype=tf.float32)
             # outputs, _ = lstm(concat_embedding)
             # LSTM cell is replicated across stacks and timesteps.
-            first_cell = tf.nn.rnn_cell.LSTMCell(self.lstm_hidden_size, use_peepholes=True, reuse=True, name='lstm', dtype=tf.float32)
+            first_cell = tf.nn.rnn_cell.LSTMCell(self.lstm_hidden_size, use_peepholes=True, reuse=tf.AUTO_REUSE, name='lstm', dtype=tf.float32)
             # first_cell = DyerLSTMCell(self.lstm_hidden_size, concat_embedding.get_shape()[2].value)
             if self.num_layers > 1:
-                stacked_cell = tf.nn.rnn_cell.LSTMCell(self.lstm_hidden_size, use_peepholes=True, reuse=True, name='lstm', dtype=tf.float32)
+                stacked_cell = tf.nn.rnn_cell.LSTMCell(self.lstm_hidden_size, use_peepholes=True, reuse=tf.AUTO_REUSE, name='lstm', dtype=tf.float32)
                 # stacked_cell = DyerLSTMCell(self.lstm_hidden_size, self.lstm_hidden_size)
                 cell = tf.nn.rnn_cell.MultiRNNCell([first_cell] + [stacked_cell] * (self.num_layers - 1))
             else:
