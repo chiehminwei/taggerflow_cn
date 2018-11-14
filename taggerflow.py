@@ -53,7 +53,6 @@ if __name__ == "__main__":
     logging.getLogger().setLevel(logging.INFO)
 
     exp_logdir = os.path.join(args.logdir, args.exp)
-    exp_logdir = os.path.join("gdrive/'My Drive'")
 
     maybe_mkdirs(exp_logdir)
 
