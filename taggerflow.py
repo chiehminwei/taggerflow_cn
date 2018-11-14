@@ -29,7 +29,7 @@ def get_default_parameters(sentences):
     #                          ("suffix_2", EmpiricalSuffixSpace(2, sentences)),
     #                          ("suffix_3", EmpiricalSuffixSpace(3, sentences)),
     #                          ("suffix_4", EmpiricalSuffixSpace(4, sentences))])
-    parameters = Parameters([("words", TurianEmbeddingSpace('data/embeddings/merge_sgns_bigram_char300.txt'))])
+    parameters = Parameters([("words", TurianEmbeddingSpace('data/embeddings/polyglot.txt'))])
     return parameters
 
 if __name__ == "__main__":
