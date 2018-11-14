@@ -13,7 +13,7 @@ from ccgbank import *
 from util import *
 
 class SupertaggerData(object):
-    max_tokens = 102
+    max_tokens = 160
     batch_size = 32
     bucket_size = 5
     max_tritrain_length = 72
