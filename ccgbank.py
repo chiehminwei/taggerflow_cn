@@ -22,12 +22,10 @@ class SupertagReader(object):
                      is_tritrain) for words,supertags in sentences]
 
     def get_split(self, split_name, is_tritrain):
-        return self.get_sentences(util.maybe_download("data",
-                                                       "http://lsz-gpu-01.cs.washington.edu/resources/",
-                                                       split_name + ".stagged"), is_tritrain)
+        return self.get_sentences(split_name, is_tritrain)
 
-    def get_splits(self, read_tritrain=True):
-        train = self.get_split("train", is_tritrain=False)
-        tritrain = self.get_split("tritrain", is_tritrain=True) if read_tritrain else []
-        dev = self.get_split("dev", is_tritrain=False)
+    def get_splits(self, read_tritrain=False):
+        train = self.get_split("data/train.txt", is_tritrain=False)
+        tritrain = self.get_split("data/tritrain.txt", is_tritrain=True) if read_tritrain else []
+        dev = self.get_split("data/dev.txt", is_tritrain=False)
         return train, tritrain, dev

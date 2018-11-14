@@ -40,11 +40,14 @@ class TurianEmbeddingSpace(EmbeddingSpace):
                 word = splits[0]
 
                 if i == 0 and word != UNKNOWN_MARKER:
-                    raise ValueError("First embedding in the file should represent the unknown word.")
-
+                    word = UNKNOWN_MARKER.lower()
+                    # raise ValueError("First embedding in the file should represent the unknown word.")
+                    # continue
                 word = word.lower()
                 if word not in already_added:
-                    embedding = [float(s) for s in splits[1:]]
+                    if i == 0:
+                        embedding = [0 for i in range(64)]
+                    else: embedding = [float(s) for s in splits[1:]]
                     if self.embedding_size is None:
                         self.embedding_size = len(embedding)
                     elif self.embedding_size != len(embedding):

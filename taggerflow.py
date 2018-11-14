@@ -20,17 +20,16 @@ def get_pretrained_parameters(params_file):
     return params
 
 def get_default_parameters(sentences):
-    parameters = Parameters([("words",    TurianEmbeddingSpace(maybe_download("data",
-                                                                              "http://lsz-gpu-01.cs.washington.edu/resources/",
-                                                                              "embeddings.raw"))),
-                             ("prefix_1", EmpiricalPrefixSpace(1, sentences)),
-                             ("prefix_2", EmpiricalPrefixSpace(2, sentences)),
-                             ("prefix_3", EmpiricalPrefixSpace(3, sentences)),
-                             ("prefix_4", EmpiricalPrefixSpace(4, sentences)),
-                             ("suffix_1", EmpiricalSuffixSpace(1, sentences)),
-                             ("suffix_2", EmpiricalSuffixSpace(2, sentences)),
-                             ("suffix_3", EmpiricalSuffixSpace(3, sentences)),
-                             ("suffix_4", EmpiricalSuffixSpace(4, sentences))])
+    # parameters = Parameters([("words",    TurianEmbeddingSpace('data/polyglot')),
+    #                          ("prefix_1", EmpiricalPrefixSpace(1, sentences)),
+    #                          ("prefix_2", EmpiricalPrefixSpace(2, sentences)),
+    #                          ("prefix_3", EmpiricalPrefixSpace(3, sentences)),
+    #                          ("prefix_4", EmpiricalPrefixSpace(4, sentences)),
+    #                          ("suffix_1", EmpiricalSuffixSpace(1, sentences)),
+    #                          ("suffix_2", EmpiricalSuffixSpace(2, sentences)),
+    #                          ("suffix_3", EmpiricalSuffixSpace(3, sentences)),
+    #                          ("suffix_4", EmpiricalSuffixSpace(4, sentences))])
+    parameters = Parameters([("words", TurianEmbeddingSpace('data/embeddings/merge_sgns_bigram_char300.txt'))])
     return parameters
 
 if __name__ == "__main__":
@@ -60,9 +59,7 @@ if __name__ == "__main__":
     output_dir = tempfile.mkdtemp(prefix="taggerflow-")
 
     with LoggingToFile(exp_logdir, "init.log"):
-        supertag_space = SupertagSpace(maybe_download("data",
-                                                      "http://lsz-gpu-01.cs.washington.edu/resources/",
-                                                      "categories"))
+        supertag_space = SupertagSpace("data/supertags/supertags.txt")
 
         reader = SupertagReader()
         train_sentences, tritrain_sentences, dev_sentences = reader.get_splits(args.tritrain and args.checkpoint is None)
@@ -72,7 +69,7 @@ if __name__ == "__main__":
         else:
             parameters = get_pretrained_parameters(args.params)
         parameters.write(output_dir)
-        if args.jackknifed is not None:
+        if args.jackknifed is not None and 1 == 2:
             logging.info("Replacing training data with siblings of {}".format(args.jackknifed))
             jackknifed_dir = os.path.dirname(args.jackknifed)
             train_sentences = []
