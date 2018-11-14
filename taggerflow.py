@@ -29,7 +29,7 @@ def get_default_parameters(sentences):
     #                          ("suffix_2", EmpiricalSuffixSpace(2, sentences)),
     #                          ("suffix_3", EmpiricalSuffixSpace(3, sentences)),
     #                          ("suffix_4", EmpiricalSuffixSpace(4, sentences))])
-    parameters = Parameters([("words", TurianEmbeddingSpace('data/embeddings/polyglot.txt'))])
+    parameters = Parameters([("words", TurianEmbeddingSpace('/data/embeddings/polyglot.txt'))])
     return parameters
 
 if __name__ == "__main__":
@@ -59,7 +59,7 @@ if __name__ == "__main__":
     output_dir = tempfile.mkdtemp(prefix="taggerflow-")
 
     with LoggingToFile(exp_logdir, "init.log"):
-        supertag_space = SupertagSpace("data/supertags/supertags.txt")
+        supertag_space = SupertagSpace("/data/supertags/supertags.txt")
 
         reader = SupertagReader()
         train_sentences, tritrain_sentences, dev_sentences = reader.get_splits(args.tritrain and args.checkpoint is None)
